@@ -34,5 +34,5 @@ export const users: User[] = [
     name: "Other",
     avatar: "https://www.jtlrgroup.com/wp-content/uploads/2022/05/jtlr.svg",
     groupIds: ["engineering", "design"],
-  }
+  },
 ];
