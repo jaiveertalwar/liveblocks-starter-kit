@@ -12,13 +12,14 @@ export const authOptions = {
     // Get extra user info from your database to pass to front-end
     // For front end, update next-auth.d.ts with session type
     async session({ session }: { session: any }) {
-      const userInfo: User | null = await getUser(session.user.email);
+      // Replace this logic with your actual user retrieval logic
+      const userFromDatabase = await fetchUserFromDatabase(session.user.email);
 
-      if (!userInfo) {
+      if (!userFromDatabase) {
         throw new Error("User not found");
       }
 
-      session.user.info = userInfo;
+      session.user.info = userFromDatabase;
       return session;
     },
   },
