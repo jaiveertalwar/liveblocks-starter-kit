@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import { CredentialsProvider } from "next-auth/providers";
 import { getUser } from "../../../lib/server";
 import { User } from "../../../types";
 import Auth0Provider from "next-auth/providers/auth0";
@@ -29,7 +29,12 @@ export const authOptions = {
   },
   providers: [
     CredentialsProvider({
-      async authorize(credentials) {
+      credentials: {
+        // Define credential fields here
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      authorize: async (credentials) => {
         if (!credentials) {
           return null;
         }
@@ -43,7 +48,7 @@ export const authOptions = {
         return {
           id: user.id,
           name: user.name,
-          email: user.id,
+          email: user.email,
           image: user.avatar,
         };
       },
