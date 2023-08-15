@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import { User } from "../../../types";
-import Auth0Provider from "next-auth/providers/auth0";
+import GoogleProvider from "next-auth/providers/google";
 
 export const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET;
 
@@ -16,10 +16,9 @@ export const authOptions = {
     signIn: "/signin",
   },
   providers: [
-    Auth0Provider({
-      clientId: process.env.AUTH0_CLIENT_ID as string,
-      clientSecret: process.env.AUTH0_CLIENT_SECRET as string,
-      issuer: process.env.AUTH0_ISSUER_BASE_URL,
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
 };
