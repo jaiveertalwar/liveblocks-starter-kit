@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+import { getUser } from "../../../lib/server";
 import { User } from "../../../types";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -8,7 +9,13 @@ export const authOptions = {
   secret: NEXTAUTH_SECRET,
   callbacks: {
     async session({ session }: { session: any }) {
-      // Implement your session logic here
+      const userInfo: User | null = await getUser(session.user.email);
+
+      if (!userInfo) {
+        throw new Error("User not found");
+      }
+
+      session.user.info = userInfo;
       return session;
     },
   },
