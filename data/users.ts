@@ -8,32 +8,43 @@ import { User } from "../types";
  * The groupIds are the names of the groups the user is part of.
  * Group info is in /data/groups.ts
  */
-export const users: User[] = [
+export const users: Omit<User, "color">[] = [
+  /*
   {
-    id: "contact@jtlr.org",
-    name: "CAJCS Student",
-    avatar: "https://cathedral-school.com/wp-content/uploads/2017/03/logo.png",
+    id: "[YOUR EMAIL ADDRESS]",
+    name: "[YOUR DISPLAY NAME]",
+    avatar: "https://liveblocks.io/avatars/avatar-0.png",
     groupIds: ["product", "engineering", "design"],
-    color: getRandomColor(),
+  },
+  */
+  {
+    id: "charlie.layne@example.com",
+    name: "CAJCS Student",
+    avatar: "https://liveblocks.io/avatars/avatar-2.png",
+    groupIds: ["product", "engineering", "design"],
   },
   {
-    id: "contact+1@jtlr.org",
+    id: "mislav.abha@example.com",
     name: "CAJCS Teacher",
-    avatar: "https://cathedral-school.com/wp-content/uploads/2017/03/logo.png",
+    avatar: "https://liveblocks.io/avatars/avatar-3.png",
     groupIds: ["engineering"],
-    color: getRandomColor(),
   },
   {
-    id: "jtlr@group.com",
-    name: "Other",
-    avatar: "https://www.jtlrgroup.com/wp-content/uploads/2022/05/jtlr.svg",
+    id: "tatum.paolo@example.com",
+    name: "JTLR1",
+    avatar: "https://liveblocks.io/avatars/avatar-4.png",
     groupIds: ["engineering", "design"],
-    color: getRandomColor(),
-  }
+  },
+  {
+    id: "anjali.wanda@example.com",
+    name: "Other",
+    avatar: "https://liveblocks.io/avatars/avatar-5.png",
+    groupIds: ["product"],
+  },
+  {
+    id: "emil.joyce@example.com",
+    name: "Emil",
+    avatar: "https://liveblocks.io/avatars/avatar-6.png",
+    groupIds: ["product", "design"],
+  },
 ];
-
-function getRandomColor(): string {
-  const colors = ["#FF5733", "#33FF77", "#3388FF", "#FF33E8", "#33FFE7", "#FF33B8"];
-  const randomIndex = Math.floor(Math.random() * colors.length);
-  return colors[randomIndex];
-}
