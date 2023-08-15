@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import { User } from "../../../types";
-import { GoogleAuth } from "google-auth-library";
-import Auth0Provider from "next-auth/providers/auth0";
+import axios from "axios";
+import qs from "qs";
 
 // Your NextAuth secret (generate a new one for production)
 // More info: https://next-auth.js.org/configuration/options#secret
@@ -32,22 +32,34 @@ export const authOptions = {
       name: "Google",
       type: "oauth",
       version: "2.0",
-      scope: "profile email",
+      scope: "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
       params: { grant_type: "authorization_code" },
-      accessTokenUrl: "https://accounts.google.com/o/oauth2/token",
+      accessTokenUrl: "https://oauth2.googleapis.com/token",
       authorizationUrl:
-        "https://accounts.google.com/o/oauth2/auth?response_type=code",
-      profileUrl: "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",
-      profile(profile: any) {
+        `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${process.env.NEXTAUTH_URL}/api/auth/callback/google&state=${encodeURIComponent(
+          JSON.stringify({ callbackUrl: `${process.env.NEXTAUTH_URL}/api/auth/callback/google` })
+        )}`,
+      profileUrl: "https://www.googleapis.com/oauth2/v3/userinfo",
+      async profile(profile: any, tokens: any) {
+        const response = await axios.get(profileUrl, {
+          headers: {
+            Authorization: `Bearer ${tokens.access_token}`
+          }
+        });
+
         return {
-          id: profile.id,
-          name: profile.name,
-          email: profile.email,
-          image: profile.picture,
+          id: response.data.sub,
+          name: response.data.name,
+          email: response.data.email,
+          image: response.data.picture,
         };
       },
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
 
-    // Other providers if needed
+    // ...add more providers here
+  ],
+};
+
+export default NextAuth(authOptions);
