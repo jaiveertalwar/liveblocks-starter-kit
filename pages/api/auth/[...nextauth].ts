@@ -27,10 +27,8 @@ export const authOptions = {
   pages: {
     signIn: "/signin",
   },
-
-  // Configure one or more authentication providers
-  // More info: https://next-auth.js.org/providers/
   providers: [
+    CredentialsProvider({
       async authorize(credentials) {
         if (!credentials) {
           return null;
@@ -56,7 +54,6 @@ export const authOptions = {
       clientSecret: process.env.AUTH0_CLIENT_SECRET as string,
       issuer: process.env.AUTH0_ISSUER_BASE_URL,
     }),
-
   ],
 };
 
