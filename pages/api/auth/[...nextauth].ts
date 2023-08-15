@@ -2,13 +2,14 @@ import NextAuth from "next-auth";
 import { getUser } from "../../../lib/server";
 import { User } from "../../../types";
 import GoogleProvider from "next-auth/providers/google";
+import { Session } from "next-auth";
 
 export const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET;
 
 export const authOptions = {
   secret: NEXTAUTH_SECRET,
   callbacks: {
-    async session(session) {
+    async session(session: Session) {
       try {
         // Fetch additional user info from your database using the email
         const userInfo: User | null = await getUser(session.user.email);
