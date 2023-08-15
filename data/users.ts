@@ -18,33 +18,21 @@ export const users: Omit<User, "color">[] = [
   },
   */
   {
-    id: "charlie.layne@example.com",
-    name: "Charlie Layne",
-    avatar: "https://liveblocks.io/avatars/avatar-2.png",
+    id: "contact@jtlr.org",
+    name: "CAJCS Student",
+    avatar: "https://cathedral-school.com/wp-content/uploads/2017/03/logo.png",
     groupIds: ["product", "engineering", "design"],
   },
   {
-    id: "mislav.abha@example.com",
-    name: "Mislav Abha",
-    avatar: "https://liveblocks.io/avatars/avatar-3.png",
+    id: "contact+1@jtlr.org",
+    name: "CAJCS Teacher",
+    avatar: "https://cathedral-school.com/wp-content/uploads/2017/03/logo.png",
     groupIds: ["engineering"],
   },
   {
-    id: "tatum.paolo@example.com",
-    name: "Tatum Paolo",
-    avatar: "https://liveblocks.io/avatars/avatar-4.png",
+    id: "jtlr@group.com",
+    name: "Other",
+    avatar: "https://www.jtlrgroup.com/wp-content/uploads/2022/05/jtlr.svg",
     groupIds: ["engineering", "design"],
-  },
-  {
-    id: "anjali.wanda@example.com",
-    name: "Anjali Wanda",
-    avatar: "https://liveblocks.io/avatars/avatar-5.png",
-    groupIds: ["product"],
-  },
-  {
-    id: "emil.joyce@example.com",
-    name: "Emil Joyce",
-    avatar: "https://liveblocks.io/avatars/avatar-6.png",
-    groupIds: ["product", "design"],
-  },
+  }
 ];
