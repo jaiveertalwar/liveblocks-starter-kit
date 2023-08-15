@@ -13,7 +13,7 @@ export const authOptions = {
     // For front end, update next-auth.d.ts with session type
     async session({ session }: { session: any }) {
       // Replace this logic with your actual user retrieval logic
-      const userFromDatabase = await fetchUserFromDatabase(session.user.email);
+      const userFromDatabase = await UserFromDatabase(session.user.email);
 
       if (!userFromDatabase) {
         throw new Error("User not found");
