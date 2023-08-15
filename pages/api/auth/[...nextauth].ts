@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import { getUser } from "../../../lib/server";
 import { User } from "../../../types";
 import GoogleProvider from "next-auth/providers/google";
-import { Session } from "next-auth";
+import { Session, JWT } from "next-auth";
 
 export const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET;
 
@@ -26,6 +26,7 @@ export const authOptions = {
         return session;
       }
     },
+    // You might need to add other callback functions here if required
   },
   pages: {
     signIn: "/signin",
