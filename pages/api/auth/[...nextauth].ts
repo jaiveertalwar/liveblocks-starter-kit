@@ -1,4 +1,6 @@
 import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { getUser } from "../../../lib/server";
 import { User } from "../../../types";
 import Auth0Provider from "next-auth/providers/auth0";
 
@@ -26,6 +28,27 @@ export const authOptions = {
     signIn: "/signin",
   },
   providers: [
+    CredentialsProvider({
+      async authorize(credentials) {
+        if (!credentials) {
+          return null;
+        }
+
+        const user: User | null = await getUser(credentials.email);
+
+        if (!user) {
+          throw new Error("User not found");
+        }
+
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.id,
+          image: user.avatar,
+        };
+      },
+    }),
+
     Auth0Provider({
       clientId: process.env.AUTH0_CLIENT_ID as string,
       clientSecret: process.env.AUTH0_CLIENT_SECRET as string,
