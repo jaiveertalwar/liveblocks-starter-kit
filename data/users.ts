@@ -8,7 +8,7 @@ import { User } from "../types";
  * The groupIds are the names of the groups the user is part of.
  * Group info is in /data/groups.ts
  */
-export const users: Omit<User, "color">[] = [
+export const users: User[] = [
   /*
   {
     id: "[YOUR EMAIL ADDRESS]",
