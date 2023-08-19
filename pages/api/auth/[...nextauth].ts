@@ -11,7 +11,7 @@ export const authOptions = {
   secret: NEXTAUTH_SECRET,
   callbacks: {
     // Get extra user info from your database to pass to front-end
-    // For front end, update next-auth.d.ts with session type
+    // For front end, update next-auth.d.ts with session typ
     async session({ session }: { session: any }) {
       const userInfo: User | null = await getUser(session.user.email);
 
