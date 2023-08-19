@@ -60,14 +60,13 @@ export const authOptions = {
       },
     }),
 
-    /*
+    
     // Use GitHub authentication
-    // import GithubProvider from "next-auth/providers/github";
+    import GithubProvider from "next-auth/providers/github";
     GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID as string,
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
     }),
-    */
 
     /*
     // Use Auth0 authentication
